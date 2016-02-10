@@ -1,0 +1,28 @@
+- name: Install yum packages from remi
+  yum: name={{ item }} state=installed enablerepo=remi-php56,remi
+  with_items:
+    - php
+    - php-devel
+    - php-bcmath
+    - php-common
+    - php-mysql
+    - php-mcrypt
+    - php-cli
+    - php-xml
+    - php-mbstring
+    - php-gd
+    - php-fpm
+    - php-pear
+    - php-pecl-imagick
+    - php-pecl-xdebug
+    - php-pecl-zendopcache
+    - php-pecl-memcached
+    - php-pecl-redis
+    - php-pecl-amqp
+
+- include: ./php_config.yml
+
+- include: ./composer_install.yml
+
+- name: Run php-fpm
+  service: name=php-fpm state=started enabled=yes

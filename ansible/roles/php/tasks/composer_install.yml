@@ -1,0 +1,12 @@
+- name: Install composer locally
+  sudo: no
+  shell: |
+    cd {{ app_root_path }}
+    curl -sS https://getcomposer.org/installer | php
+
+- name: Install libraries
+  sudo: no
+  shell: |
+    cd {{ app_root_path }}
+    php composer.phar self-update
+    php composer.phar install

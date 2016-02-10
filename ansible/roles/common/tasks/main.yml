@@ -1,0 +1,17 @@
+- name: Set timezone remove localtime
+  file: path=/etc/localtime state=absent
+
+- name: Set timezone to JST
+  file: src=/usr/share/zoneinfo/Asia/Tokyo dest=/etc/localtime state=link force=yes owner=root group=root mode=0644
+
+- name: Create the EPEL repository
+  copy: src=yum/epel.repo dest=/etc/yum.repos.d/epel.repo owner=root group=root mode=0644
+
+- name: Create the GPG key for EPEL
+  copy: src=yum/RPM-GPG-KEY-EPEL-6 dest=/etc/pki/rpm-gpg owner=root group=root mode=0644
+
+- name: Create Remi repository configration for yum
+  copy: src=yum/remi.repo dest=/etc/yum.repos.d/remi.repo owner=root group=root mode=0644
+
+- name: Create the GPG key for Remi
+  copy: src=yum/RPM-GPG-KEY-remi dest=/etc/pki/rpm-gpg owner=root group=root mode=0644

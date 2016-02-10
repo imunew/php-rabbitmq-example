@@ -1,0 +1,8 @@
+- name: Install yum packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - rabbitmq-server
+    - librabbitmq-devel
+
+- name: start rabbitmq-server
+  service: name=rabbitmq-server state=started enabled=yes
